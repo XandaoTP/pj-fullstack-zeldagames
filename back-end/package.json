@@ -2,7 +2,6 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "",
-  
   "scripts": {
     "test": "nodemon --watch ./src/**/*.ts --exec ts-node src/index.ts"
   },
@@ -16,6 +15,8 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@types/cors": "^2.8.13",
+    "cors": "^2.8.5",
     "express": "^4.18.2"
   }
 }

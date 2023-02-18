@@ -12,3 +12,18 @@ const exampleGame: Games = {
     Jogo mais recente da franquia, lançado para nintendo switch e nintendo wiiU
   `,
 };
+
+const exampleGameList: Games[] = new Array(5).fill(exampleGame);
+
+const exampleGamesAppear = exampleGameList.reduce(
+    (stack, item, index) => {
+      stack[index.toString()] = { id: index, ...item };
+      return stack;
+    },
+    {} as { [key: string]: Games }
+  );
+  
+
+  gameList.get("/", (req, res) => {
+    res.status(200).json(Object.values(exampleGamesAppear));
+  });
