@@ -1,12 +1,15 @@
-import { METHODS } from 'http';
-import React from 'react';
 import { TopBar } from './components/topbar';
 import { useAxios } from './components/useAxios';
 import { GamesList } from './components/gamesList';
 import { Games } from './entities/games';
 import { CurrentGame } from './components/datailsGame';
+import { useEffect } from 'react';
+import { Loading } from './components/loading';
 
-type games = Games
+
+type games = Games & {
+  loading: boolean;
+}
 
 function App() {
 
@@ -16,22 +19,24 @@ function App() {
     
   })
 
-  const [{ data: currentGame }, getgame] = useAxios<games>({
+  const [{ data: currentGame, loading }, getgame] = useAxios<games>({
     method: 'get',
   },{
     manual: true
   })
 
-  console.log(currentGame)
+
   return (
     <>
       <TopBar />
-      <main className='flex flex-row mx-60'>
-        {currentGame && (
-      <CurrentGame currentGame={currentGame} />
-      )}
+      <main className='flex flex-row mx-80'>
+        {loading ? <Loading/>  :
+        currentGame && (
+        <CurrentGame currentGame={currentGame} />
+        )}
+        
       {zeldaList && ( 
-      <GamesList games={zeldaList} getgame={async (id) => {
+      <GamesList games={zeldaList}  getgame={async (id) => {
               getgame({
                 url: `/games/${id}`
               });
