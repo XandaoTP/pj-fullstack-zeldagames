@@ -1,4 +1,4 @@
-import logo from '../components/images/logo.png'
+import logo from '../assets/images/logo.png'
 
 export function TopBar () {
     return (

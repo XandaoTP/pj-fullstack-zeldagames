@@ -27,3 +27,7 @@ const exampleGamesAppear = exampleGameList.reduce(
   gameList.get("/", (req, res) => {
     res.status(200).json(Object.values(exampleGamesAppear));
   });
+
+  gameList.get("/:id", (req, res) => {
+    res.status(200).json(exampleGamesAppear[req.params.id]);
+  });

@@ -12,9 +12,10 @@ const port = 5000;
 
 const host ='0.0.0.0';
 
-app.use('/games', gameList)
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use('/games', gameList)
+
 
 app.listen(port, host, () => {
     console.log(`Funfando na porta: ${port}` )
