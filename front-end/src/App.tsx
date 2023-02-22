@@ -34,21 +34,21 @@ function App() {
     <>
       <TopBar />
       <main >
-        <motion.section className='mx-auto my-0 flex flex-col w-full max-w-4xl justify-center overflow-hidden'>
+        <motion.section className='mx-auto my-20 flex flex-col w-full max-w-4xl justify-center overflow-hidden'>
             {zeldaList && ( 
-            <GamesList games={zeldaList} oi={oi}  getgame={async (id) => {
+            <GamesList games={zeldaList} getgame={async (id) => {
                 getgame({
                   url: `/games/${id}`
                 });
               } } />
               )}
         </motion.section>
-        <section className='mx-auto my-0 items-center flex flex-col w-full max-w-4xl justify-center'>      
+        <section className='mx-auto my-10 py-6 items-center flex flex-col w-full max-w-4xl justify-center h-full'>      
               {loading ? <Loading />  :
               currentGame && (
               <CurrentGame currentGame={currentGame} />
           )}
-        </section>
+        </section >
     </main>          
     </>
   );
