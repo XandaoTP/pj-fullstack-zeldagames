@@ -3,5 +3,10 @@
 @tailwind utilities;
 
 body {
-  background-color: #646363;
+  background-image: url('./assets/images/zeldabg.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center; 
+  width: 100vw;
+  height: 100vh;
 }
