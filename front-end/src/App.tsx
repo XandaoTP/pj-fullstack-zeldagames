@@ -3,15 +3,20 @@ import { useAxios } from './components/useAxios';
 import { GamesList } from './components/gamesList';
 import { Games } from './entities/games';
 import { CurrentGame } from './components/datailsGame';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Loading } from './components/loading';
+import { motion } from 'framer-motion';
 
 
 type games = Games & {
   loading: boolean;
+  oi: string;
 }
 
+
+
 function App() {
+  const oi = 'oiasdasdasd'
 
   const [{ data: zeldaList }] = useAxios<games[]>({
     url: '/games',
@@ -25,24 +30,26 @@ function App() {
     manual: true
   })
 
-
   return (
     <>
       <TopBar />
-      <main className='flex flex-row mx-80'>
-        {loading ? <Loading/>  :
-        currentGame && (
-        <CurrentGame currentGame={currentGame} />
-        )}
-        
-      {zeldaList && ( 
-      <GamesList games={zeldaList}  getgame={async (id) => {
-              getgame({
-                url: `/games/${id}`
-              });
-            } } />
-            )}
-      </main>
+      <main >
+        <motion.section className='mx-auto my-0 flex flex-col w-full max-w-4xl justify-center overflow-hidden'>
+            {zeldaList && ( 
+            <GamesList games={zeldaList} oi={oi}  getgame={async (id) => {
+                getgame({
+                  url: `/games/${id}`
+                });
+              } } />
+              )}
+        </motion.section>
+        <section className='mx-auto my-0 items-center flex flex-col w-full max-w-4xl justify-center'>      
+              {loading ? <Loading />  :
+              currentGame && (
+              <CurrentGame currentGame={currentGame} />
+          )}
+        </section>
+    </main>          
     </>
   );
 }

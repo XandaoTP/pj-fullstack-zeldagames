@@ -2,26 +2,58 @@ import styled from "styled-components"
 
 export function Loading () {
     return ( 
-       <Load></Load>
+      <Triforce>
+      <Triangle></Triangle>
+      </Triforce>
     )    
 }
 
-const Load = styled.span`
+
+const Triforce = styled.div`
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
+  from {opacity: 0%}
+  to {opacity: 100%}
+}
+ margin:50px auto;
+  width:200px;
+  height:200px;
+  `
+
+const Triangle = styled.div`
+@keyframes spin {
+  from {opacity: 0%}
+  to {opacity: 100%}
+}
+  content:'';
+	position:relative;
+	width:0px;
+	height:0px;
+	border-left: 60px solid transparent;
+	border-right: 60px solid transparent;
+	border-bottom: 104px solid #FFBC00;
+  animation: spin 1.3s infinite;
+  
+  &::before {
+    content:'';
+	position:absolute;
+	display:block;
+	border-left:60px solid transparent;
+	border-right:60px solid transparent;
+	border-bottom:104px solid #FFBC00;
+	top:104px;
+	left:-120px;
+  animation: spin 1.3s infinite;
+
   }
-  100% {
-    transform: rotate(360deg);
-  }}
-
-
-    border: 10px solid #f3f3f3;
-  border-top: 10px solid #3498db;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
-
+  &::after {
+    content:'';
+	position:absolute;
+	display:block;
+	border-left:60px solid transparent;
+	border-right:60px solid transparent;
+	border-bottom:104px solid #FFBC00;
+	top:104px;
+  animation: spin 1.3s infinite;
+  }
 
 `
