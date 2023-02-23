@@ -3,9 +3,11 @@ import { useAxios } from './components/useAxios';
 import { GamesList } from './components/gamesList';
 import { Games } from './entities/games';
 import { CurrentGame } from './components/datailsGame';
-import { useEffect, useState, useRef } from 'react';
 import { Loading } from './components/loading';
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { addBg } from './storeconfig/bg';
+
 
 
 type games = Games & {
@@ -13,10 +15,8 @@ type games = Games & {
   oi: string;
 }
 
-
-
 function App() {
-  const oi = 'oiasdasdasd'
+  
 
   const [{ data: zeldaList }] = useAxios<games[]>({
     url: '/games',
@@ -29,6 +29,9 @@ function App() {
   },{
     manual: true
   })
+
+  const dispatch = useDispatch()
+  dispatch(addBg({zeldaList}))
 
   return (
     <>
