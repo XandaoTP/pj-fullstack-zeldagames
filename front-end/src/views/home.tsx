@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Loading } from '../components/loading';
 import { CurrentGame } from '../components/datailsGame';
 import { Games } from "../entities/games";
+import { useEffect, useState } from 'react';
 
 type games = Games & {
     loading: boolean;
@@ -12,7 +13,9 @@ type games = Games & {
   }
 
 export function Home () {
-const [{data: plataformList}] = useAxios<games[]>({
+  const [plataformList, setPlataformList] = useState<games[]>([]);
+
+  const [{data : plataformData, loading: loadingPlat, error }] = useAxios<games[]>({
     url: '/plataform',
     method:'get'
 
@@ -30,6 +33,11 @@ const [{ data: zeldaList }] = useAxios<games[]>({
     manual: true
   })
 
+  useEffect(() =>{
+    if(plataformData) {
+      setPlataformList(plataformData)
+    }
+  }, [plataformData])
 
   return (
     <>
