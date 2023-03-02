@@ -1,6 +1,5 @@
 import type { Games } from "../entities/games";
 import {motion} from 'framer-motion';
-import { useSelector } from "react-redux";
 
 
 export type GameListProps = {
@@ -13,10 +12,6 @@ export type GameListProps = {
 
 export function GamesList ({ games, getgame }: GameListProps) {
 
-        const bgs = useSelector((state: any) => state.bgsReducer.bgs)
-        console.log('oi',bgs.map((item: any)=> item.nome))
-    
-      
     return (
         <motion.div className="cursor-grab " whileTap={{cursor: 'grabbing'}} >
             <motion.div 

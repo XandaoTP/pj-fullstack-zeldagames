@@ -1,60 +1,18 @@
-import { TopBar } from './components/topbar';
-import { useAxios } from './components/useAxios';
-import { GamesList } from './components/gamesList';
-import { Games } from './entities/games';
-import { CurrentGame } from './components/datailsGame';
-import { Loading } from './components/loading';
-import { motion } from 'framer-motion';
-import { useDispatch } from 'react-redux';
-import { addBg } from './storeconfig/bg';
+
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router';
+import { Home } from './views/home';
 
 
-
-type games = Games & {
-  loading: boolean;
-  oi: string;
-}
 
 function App() {
   
 
-  const [{ data: zeldaList }] = useAxios<games[]>({
-    url: '/games',
-    method: 'get'
-    
-  })
-
-  const [{ data: currentGame, loading }, getgame] = useAxios<games>({
-    method: 'get',
-  },{
-    manual: true
-  })
-
-  const dispatch = useDispatch()
-  dispatch(addBg({zeldaList}))
-
   return (
-    <>
-      <TopBar />
-      <main >
-        <motion.section className='mx-auto my-20 flex flex-col w-full max-w-4xl justify-center overflow-hidden'>
-            {zeldaList && ( 
-            <GamesList games={zeldaList} getgame={async (id) => {
-                getgame({
-                  url: `/games/${id}`
-                });
-              } } />
-              )}
-        </motion.section>
-        <section className='mx-auto my-10 py-6 items-center flex flex-col w-full max-w-4xl justify-center h-full'>      
-              {loading ? <Loading />  :
-              currentGame && (
-              <CurrentGame currentGame={currentGame} />
-          )}
-        </section >
-    </main>          
-    </>
-  );
+      <Routes>
+        <Route path='/' element={<Home />}/>
+      </Routes>
+    )
 }
 
 export default App;
