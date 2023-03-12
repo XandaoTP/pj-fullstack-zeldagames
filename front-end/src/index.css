@@ -2,14 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-image: url('./assets/images/zeldabg.jpg');
-  background-size:cover;
-  background-repeat: no-repeat;
-  background-position: center; 
-  width: 100vw;
-  height: 100%;
+body{
+ background-image: url('../src/assets/images/zeldabg.jpg');
+ background-size: auto;
+ background-repeat: no-repeat;
 }
-
-
-

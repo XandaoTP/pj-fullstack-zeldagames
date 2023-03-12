@@ -1,14 +1,16 @@
-import { useAxios } from "../components/useAxios";
+import { useAxios } from "../services/useAxios";
 import { TopBar } from '../components/topbar';
 import { GamesList } from '../components/gamesList';
-import { motion } from 'framer-motion';
-import { Loading } from '../components/loading';
 import { CurrentGame } from '../components/datailsGame';
 import { Games } from "../entities/games";
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 type games = Games & {
     loading: boolean;
+    bg: string;
 
   }
 
@@ -21,46 +23,52 @@ export function Home () {
 
 })
 
+const [, deleteGame] = useAxios(
+  {
+    method: "delete",
+  },
+  {
+    manual: true,
+  }
+);
+
 const [{ data: zeldaList }] = useAxios<games[]>({
     url: '/games',
     method: 'get'
     
   })
-
-  const [{ data: currentGame, loading }, getgame] = useAxios<games>({
+  const [{ data: currentGame, loading = {} as Partial<Games> }, getgame] = useAxios<games>({
     method: 'get',
   },{
     manual: true
   })
-
-  useEffect(() =>{
-    if(plataformData) {
-      setPlataformList(plataformData)
-    }
-  }, [plataformData])
+  
+  const navigate = useNavigate()
 
   return (
     <>
       <TopBar />
-      <main >
-        {plataformList?.map(({id, title, description}) => 
-        <li>{title}</li>)}
-        <motion.section className='mx-auto my-20 flex flex-col w-full max-w-4xl justify-center overflow-hidden'>
+      <main className="m-0 p-0 flex flex-row"> 
+           
+            <CurrentGame
+            {...currentGame}
+            onDelete={async () => {
+              await deleteGame({
+                url: `/games/${currentGame?.id}`
+              });
+              alert("Jogo deletado")
+              navigate('/')
+            }} />   
             {zeldaList && ( 
-            <GamesList games={zeldaList} getgame={async (id) => {
+            <GamesList 
+                games={zeldaList} 
+                getgame={async (id) => {
                 getgame({
                   url: `/games/${id}`
                 });
               } } />
-              )}
-        </motion.section>
-        <section className='mx-auto my-10 py-6 items-center flex flex-col w-full max-w-4xl justify-center h-full'>      
-              {loading ? <Loading />  :
-
-              currentGame && (
-              <CurrentGame currentGame={currentGame} />
-          )}
-        </section >
+              )}  
+                   
     </main>          
     </>
   );

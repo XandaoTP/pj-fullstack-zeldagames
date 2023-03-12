@@ -6,7 +6,6 @@ export async function getPlataforms() {
     const plataformPaths = (await fs.readdir("../plataforms")).map(
       (path) => `../plataforms/${path}`
     );
-    console.log('kkkkkkkk',plataformPaths)
     const plataformPromises = plataformPaths.map((path) => fs.readFile(path));
     const plataformsBuffers = await Promise.all(plataformPromises);
     const plataforms = plataformsBuffers

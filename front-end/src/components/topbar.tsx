@@ -1,6 +1,7 @@
 import logo from '../assets/images/logo.png';
 import { useRef, useState } from "react";
 import '../assets/css/topbar.css'
+import { Link } from 'react-router-dom';
 
 
 export function TopBar () {
@@ -19,27 +20,9 @@ export function TopBar () {
     setSearch(e.target.value);
         console.log(search)
     return (
-        <header className="flex justify-between ">
-            <img src={logo} alt="The legend of Zelda" className="py-5 w-20"/> 
-            <div className="relative text-center">
-                <div className={` search ${isOpen}`}>
-                    <input
-                        ref={inputRef}
-                        onChange={handleChange}
-                        placeholder="Find a zelda Game"
-                        type="text" 
-                    />
-                    <button
-                        onClick={handleClick}
-                        className={
-                            `uil uil-${
-                                isOpen ?
-                                "multiply" : "search"}`
-                            }>
-                    </button>
-                    
-                </div>         
-            </div>
+        <header className="flex justify-center bg-black mb-3 opacity-75">
+            <img src={logo} alt="The legend of Zelda" className="py-5 w-20 ml-auto"/>  
+            <Link to='/addgame' className="text-white ml-auto mt-auto mb-2 border-2 border-sky-500 p-4 rounded-xl bg-neutral-600">Adicionar novo jogo</Link>
         </header>
     )
 }

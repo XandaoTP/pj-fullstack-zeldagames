@@ -13,25 +13,23 @@ export type GameListProps = {
 export function GamesList ({ games, getgame }: GameListProps) {
 
     return (
-        <motion.div className="cursor-grab " whileTap={{cursor: 'grabbing'}} >
-            <motion.div 
-            className="flex"
-            drag='x'
-            dragConstraints={{ right: 0, left: -1520}}
-            >
-                {games?.map(({id, title, description, picture})=> 
-                <motion.div 
+        <div className="flex-[1]">
+            <div>
+                {games?.map(({id, title, description, image})=> 
+                <div 
                 key={id} 
-                className="bg-white m-3 list-none min-h-[200px] min-w-[400px] "
+                className="bg-white m-3 list-none min-h-[200px] min-w-[400px] rounded-xl opacity-70 "
                 onClick={() => {
                 getgame(id)
                 } 
                 
-                }>
-                    <img src={picture} className="w-full pointer-events-none rounded-xl" height='90%'  alt="" />
-                </motion.div>
+                }>  
+                    <img src={image} className="w-full pointer-events-none rounded-xl" height='100%' alt={image} />
+                    <div className="text-center text">{title}</div>
+                    <div className='text-center'>{description}</div>
+                </div>
                 )}
-            </motion.div>
-        </motion.div>
+            </div>
+        </div>
     )
 }
