@@ -1,6 +1,7 @@
 import { FaTrash, FaPen } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import type { Games } from "../entities/games"
+import { Loading } from './loading';
 
 const texts = {
     deleteButton: "Deletar",
@@ -10,6 +11,7 @@ const texts = {
   
 export type DetailsGameProps = Partial<Games> & {
     onDelete?: () => void | Promise<void>
+    loading: boolean;
   }
 
 
@@ -19,14 +21,18 @@ export function CurrentGame ({
     description,
     image,
     content,
-    onDelete
+    onDelete,
+    loading
 }: DetailsGameProps) {
+    console.log(loading)
 
 
     return ( 
         <section className="px-7 bg-slate-100 rounded-3xl flex-[2] opacity-90">
             <div className="py-10 justify-center"> 
              {id !== undefined && (
+            <>
+            {loading ? <Loading /> :
             <>
                 <div className="flex justify-end">
                     <button
@@ -41,7 +47,10 @@ export function CurrentGame ({
                     <h2 className="font-bold justify-center" >{title}</h2>
                     <img src={image} alt='title' className="w-80 my-6" />
                     <h2>{description}</h2>
+                    <h2>{content}</h2>
                 </div>
+            </>
+                }
             </>
                 )}
             </div>

@@ -5,11 +5,11 @@ import { CurrentGame } from '../components/datailsGame';
 import { Games } from "../entities/games";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from '../components/loading';
 
 
 
 type games = Games & {
-    loading: boolean;
     bg: string;
 
   }
@@ -37,20 +37,21 @@ const [{ data: zeldaList }] = useAxios<games[]>({
     method: 'get'
     
   })
-  const [{ data: currentGame, loading = {} as Partial<Games> }, getgame] = useAxios<games>({
+  const [{ data: currentGame, loading }, getgame] = useAxios<games>({
     method: 'get',
   },{
     manual: true
   })
   
   const navigate = useNavigate()
+  console.log('aqui',loading)
 
   return (
     <>
       <TopBar />
       <main className="m-0 p-0 flex flex-row"> 
-           
             <CurrentGame
+            loading={loading}
             {...currentGame}
             onDelete={async () => {
               await deleteGame({
@@ -58,7 +59,7 @@ const [{ data: zeldaList }] = useAxios<games[]>({
               });
               alert("Jogo deletado")
               navigate('/')
-            }} />   
+            }} /> 
             {zeldaList && ( 
             <GamesList 
                 games={zeldaList} 
