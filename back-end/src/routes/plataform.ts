@@ -1,5 +1,5 @@
 import express from 'express';
-import * as getListPlataforms from "../../getListPlataforms";
+import * as getListPlataforms from "../controllers/plataforms";
 
 
 

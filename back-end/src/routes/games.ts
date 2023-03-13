@@ -1,5 +1,5 @@
 import express from 'express';
-import { createGame, deleteGame, getGame, getGames, updateGame } from '../gamesCrud';
+import { createGame, deleteGame, getGame, getGames, updateGame } from '../controllers/games';
 
 export const games = express.Router();
 

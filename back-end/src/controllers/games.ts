@@ -1,4 +1,4 @@
-import { Games } from "./types/games";
+import { Games } from "../types/games";
 import  { promises } from 'fs'
 
 
