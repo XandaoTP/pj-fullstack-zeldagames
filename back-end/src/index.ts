@@ -2,6 +2,7 @@ import { plataformList } from './routes/plataform';
 import express  from "express";
 import cors from "cors";
 import { games } from "./routes/games";
+require('dotenv').config()
 
 const app = express();
 
