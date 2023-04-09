@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 import type { Games } from "../entities/games"
 import { Loading } from './loading';
 
-const texts = {
-    deleteButton: "Deletar",
-    editLink: "Editar",
-  };
-
   
 export type DetailsGameProps = Partial<Games> & {
     onDelete?: () => void | Promise<void>

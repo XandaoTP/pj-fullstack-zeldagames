@@ -13,12 +13,26 @@ export type Games = {
 export async function findOneById(id: number) : Promise<Games> {
     const connection = await dbPool.getConnection();
     const [[games]] = await connection.query('select * from games where id=?', [id]) as any;
+    connection.release()
+    
     return games;
 }
-export async function findAll() : Promise<Games[]> {
+export async function findAll({
+    direction = 'desc',
+    orderBy = 'created_at',
+    limit = 5,
+    offset = 0
+} : {
+    direction?: string,
+    orderBy?: string,
+    limit?: number,
+    offset?:  number
+} = {}) : Promise<Games[]> {
     const connection = await dbPool.getConnection();
-    const [games] = await connection.query('select * from games') ;
+    const [games] = await connection.query(`select * from games order by ${orderBy} ${direction} limit ${limit} offset ${offset}`) ;
+    connection.release()
     return games as Games[];
+
     
 
 }
@@ -30,6 +44,8 @@ export async function create({title, content, subtitle, picture}: Games) {
     const id = response.insertID;
 
     const game = await findOneById(id)
+    connection.release()
+    
     return {game, success}
 
 }

@@ -32,19 +32,16 @@ const [, deleteGame] = useAxios(
   }
 );
 
-const [{ data: zeldaList }] = useAxios<games[]>({
-    url: '/games',
-    method: 'get'
-    
-  })
+
   const [{ data: currentGame, loading }, getgame] = useAxios<games>({
     method: 'get',
   },{
     manual: true
   })
   
+  
   const navigate = useNavigate()
-  console.log('aqui',loading)
+
 
   return (
     <>
@@ -60,16 +57,13 @@ const [{ data: zeldaList }] = useAxios<games[]>({
               alert("Jogo deletado")
               navigate('/')
             }} /> 
-            {zeldaList && ( 
+             
             <GamesList 
-                games={zeldaList} 
-                getgame={async (id) => {
-                getgame({
-                  url: `/games/${id}`
-                });
-              } } />
-              )}  
-                   
+          getgame={async (id) => {
+            getgame({
+              url: `/games/${id}`
+            });
+          } } games={[]} />        
     </main>          
     </>
   );

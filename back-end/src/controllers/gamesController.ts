@@ -1,16 +1,21 @@
 import express from 'express';
-import { createGame, deleteGame, getGame, getGames, updateGame } from './games';
+import { updateGame } from './games';
 import * as gamesRepository from '../repositories/gamesRepository'
+import { gameFindAllSchema } from '../schemas/gamesFindAllSchema';
 
 export const gamesController = express.Router();
 
 
   gamesController.get('/', async (req, res) => {
-    const dbGames = await gamesRepository.findAll();
-  // const games = await getGames();
-   res.status(200).json(dbGames);
-  // console.log(games)
-  
+    const params = await gameFindAllSchema.safeParseAsync(req.query)
+    if(params.success) {
+      const dbGames = await gamesRepository.findAll(params.data);
+      res.status(200).json(dbGames);
+     
+    }else{
+      res.status(200).json([])
+    }
+    
 });
 
 
