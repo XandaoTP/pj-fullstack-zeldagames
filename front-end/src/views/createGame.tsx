@@ -16,9 +16,9 @@ const texts = {
 
   const initialCreateGameState = {
     title: "",
-    description: "",
+    subtitle: "",
     content: "",
-    image: ""
+    picture: ""
   }
 
   export function AddGame()  {
@@ -53,9 +53,9 @@ const texts = {
           disabled={disable}
           className="border  border-black rounded-lg py-1 px-2 w-full"
           placeholder={texts.descriptionFieldPlaceholder}
-          value={form.description}
+          value={form.subtitle}
           onChange={(event) =>
-            setForm({ ...form, description: event.target.value })
+            setForm({ ...form, subtitle: event.target.value })
           }
         />
         <input
@@ -63,9 +63,9 @@ const texts = {
           disabled={disable}
           className="border border-black rounded-lg py-1 px-2 w-full"
           placeholder={texts.contentImage}
-          value={form.image}
+          value={form.picture}
           onChange={(event) =>
-            setForm({ ...form, image: event.target.value })
+            setForm({ ...form, picture: event.target.value })
           }
         />
         <textarea

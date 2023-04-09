@@ -2,7 +2,7 @@ export type Games = {
     id?: number;
     title: string;
     picture: string;
-    description: string;
+    subtitle: string;
     content: string;
     createdAt: Date;
 };

@@ -16,9 +16,9 @@ const texts = {
 
   const initialEditGameState = {
     title: "",
-    description: "",
+    subtitle: "",
     content: "",
-    image: ""
+    picture: ""
   }
   
   export function EditGame() {
@@ -39,7 +39,7 @@ const texts = {
     const [, editGame] = useAxios(
       {
         url: `/games/${id}`,
-        method: "patch",
+        method: "put",
         data: form,
       },
       {
@@ -74,9 +74,9 @@ const texts = {
             disabled={disable}
             className="border border-gray-300 rounded-lg py-1 px-2 w-full"
             placeholder={texts.descriptionFieldPlaceholder}
-            value={form.description}
+            value={form.subtitle}
             onChange={(event) =>
-              setForm({ ...form, description: event.target.value })
+              setForm({ ...form, subtitle: event.target.value })
             }
           />
           <input
@@ -84,9 +84,9 @@ const texts = {
             disabled={disable}
             className="border border-gray-300 rounded-lg py-1 px-2 w-full"
             placeholder={texts.contentImage}
-            value={form.image}
+            value={form.picture}
             onChange={(event) =>
-              setForm({ ...form, image: event.target.value })
+              setForm({ ...form, picture: event.target.value })
             }
           />
           <textarea

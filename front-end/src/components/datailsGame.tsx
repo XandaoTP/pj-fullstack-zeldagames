@@ -18,8 +18,8 @@ export type DetailsGameProps = Partial<Games> & {
 export function CurrentGame ({
     id,
     title,
-    description,
-    image,
+    subtitle,
+    picture,
     content,
     onDelete,
     loading
@@ -45,8 +45,8 @@ export function CurrentGame ({
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <h2 className="font-bold justify-center" >{title}</h2>
-                    <img src={image} alt='title' className="w-80 my-6" />
-                    <h2>{description}</h2>
+                    <img src={picture} alt={picture} className="w-80 my-6" />
+                    <h2>{subtitle}</h2>
                     <h2>{content}</h2>
                 </div>
             </>

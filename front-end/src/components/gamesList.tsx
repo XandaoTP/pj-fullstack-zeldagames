@@ -1,5 +1,4 @@
 import type { Games } from "../entities/games";
-import {motion} from 'framer-motion';
 
 
 export type GameListProps = {
@@ -15,7 +14,7 @@ export function GamesList ({ games, getgame }: GameListProps) {
     return (
         <div className="flex-[1]">
             <div>
-                {games?.map(({id, title, description, image})=> 
+                {games?.map(({id, title, content, picture})=> 
                 <div 
                 key={id} 
                 className="bg-white m-3 list-none min-h-[200px] min-w-[400px] rounded-xl opacity-70 "
@@ -24,9 +23,9 @@ export function GamesList ({ games, getgame }: GameListProps) {
                 } 
                 
                 }>  
-                    <img src={image} className="w-full pointer-events-none rounded-xl" height='100%' alt={image} />
+                    <img src={picture} className="w-full pointer-events-none rounded-xl" height='100%' alt={picture} />
                     <div className="text-center text">{title}</div>
-                    <div className='text-center'>{description}</div>
+                    <div className='text-center'>{content}</div>
                 </div>
                 )}
             </div>

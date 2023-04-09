@@ -1,0 +1,17 @@
+POST http://localhost:5000/games/createmany
+Content-Type: application/json
+
+[
+    {
+    "title": "oi 1",
+    "content": "oi 1",
+    "subtitle": "oi 1",
+    "picture": "oi 1"
+    },   
+    {
+    "title": "oi 2",
+    "content": "oi 1",
+    "subtitle": "oi 1",
+    "picture": "oi 1"
+    }
+]

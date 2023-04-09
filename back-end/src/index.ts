@@ -1,7 +1,7 @@
 import { plataformList } from './routes/plataform';
 import express  from "express";
 import cors from "cors";
-import { games } from "./routes/games";
+import { gamesController } from "./controllers/gamesController";
 require('dotenv').config()
 
 const app = express();
@@ -14,7 +14,7 @@ const host ='0.0.0.0';
 app.use(express.json());
 app.use(cors());
 
-app.use('/games', games)
+app.use('/games', gamesController)
 app.use('/plataform', plataformList)
 
 app.listen(port, host, () => {
