@@ -13,11 +13,13 @@ export const gamesController = express.Router();
       res.status(200).json(dbGames);
      
     }else{
-      res.status(200).json([])
+      res.status(200).json({
+        count: 0,
+        games: []
+      })
     }
     
 });
-
 
   gamesController.get("/:id", async (req, res) => {
     const id = Number(req.params.id)

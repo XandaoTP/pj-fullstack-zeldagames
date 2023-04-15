@@ -1,7 +1,7 @@
 import { useAxios } from "../services/useAxios";
 import type { Games } from "../entities/games";
 import { useEffect, useState } from "react";
-import { TypeOf } from "zod";
+
 
 
 type games = Games & {
@@ -9,9 +9,14 @@ type games = Games & {
 
   }
 
+const texts = {
+    nextGames: 'Ver mais'
+}  
+
 export type GameListProps = {
     games: Games[];
-    getgame: (id: number) => Promise<void>
+    getgame: (id: number) => Promise<void>;
+    nextGames?: boolean
 };
 
 const gamesOrderBy = {
@@ -25,12 +30,25 @@ const gamesOrderBy = {
     },
   };
 
+  const limitGames = 5;
 
 
-export function GamesList ({ getgame }: GameListProps) {
-    const [gamesParams, setGamesParams] = useState(gamesOrderBy.createdAtAsc)
+export function GamesList ({ getgame }: GameListProps, nextGames = false) {
+    const [gamesParams, setGamesParams] = useState({
+        ...gamesOrderBy.createdAtAsc,
+        limit : limitGames,
+        offset: 0,
+        search: undefined as string | undefined,
+    })
 
-    const [{ data: zeldaList }, getGames] = useAxios<games[]>({
+    const [{ data: {count : gamesCount, games: zeldaList } = 
+        {
+            count: 0,
+            games: [],
+            
+        }
+        }, 
+            getGames] = useAxios<{count: number, games:games[]}>({
         url: '/games',
         method: 'get'
         }, {
@@ -45,8 +63,30 @@ export function GamesList ({ getgame }: GameListProps) {
     }, [])    
     return (
         <div className="flex-[1]">
-            <select className="p-2 m-3 justify-center" onChange={(event) => {
-                const params = gamesOrderBy[event.target.value as keyof typeof gamesOrderBy]
+            <div className="flex justify-between">
+            <input className="m-3 bg-white text-center rounded-lg border border-black w-full text-black shadow-sm shadow-black" 
+            type="text" 
+            placeholder="Pesquisar"
+            value={gamesParams.search}  
+            onChange={event => {
+                const search = event.target.value;
+                    const params = {
+                        ...gamesParams,
+                        search,
+                        offset: 0
+                    };
+                    setGamesParams(params)
+                    
+                    getGames({
+                    params,
+                    })
+
+            }} />
+            <select className="p-2 m-3 rounded-lg" onChange={(event) => {
+                const params = {...gamesParams, 
+                    offset: 0,
+                    search: '',
+                    ...gamesOrderBy[event.target.value as keyof typeof gamesOrderBy]}
                 setGamesParams(params)
                 getGames({
                     params,
@@ -55,6 +95,8 @@ export function GamesList ({ getgame }: GameListProps) {
                 <option value='createdAtAsc' defaultChecked>Mais Antigos</option>
                 <option value='createdAtDesc' >Mais recentes</option>
             </select>
+            
+            </div>
             <div>
                 {zeldaList?.map(({id, title, content, picture})=> 
                 <div 

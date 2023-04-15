@@ -1,3 +1,4 @@
+import { number } from "zod";
 import { dbPool } from "../db/dbPool";
 
 export type Games = {
@@ -21,17 +22,25 @@ export async function findAll({
     direction = 'desc',
     orderBy = 'created_at',
     limit = 5,
-    offset = 0
+    offset = 0,
+    search,
 } : {
     direction?: string,
     orderBy?: string,
     limit?: number,
-    offset?:  number
-} = {}) : Promise<Games[]> {
+    offset?:  number,
+    search?: string
+} = {}) : Promise<{
+    games: Games[],
+    count: number
+}> {
     const connection = await dbPool.getConnection();
-    const [games] = await connection.query(`select * from games order by ${orderBy} ${direction} limit ${limit} offset ${offset}`) ;
+    const [games] = await connection.query(`select * from games ${search ? `where content like '%${search}%' or title like '%${search}%' or subtitle like '%${search}%'`: ''} order by ${orderBy} ${direction} limit ${limit} offset ${offset}`) as any;
+    const [[{count}]] = await connection.query(
+        "select count(*) as count from games"
+    ) as any;
     connection.release()
-    return games as Games[];
+    return { count, games };
 
     
 
