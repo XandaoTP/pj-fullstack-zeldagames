@@ -21,7 +21,7 @@ export async function findOneById(id: number) : Promise<Games> {
 export async function findAll({
     direction = 'desc',
     orderBy = 'created_at',
-    limit = 5,
+    limit = 4,
     offset = 0,
     search,
 } : {
@@ -35,7 +35,10 @@ export async function findAll({
     count: number
 }> {
     const connection = await dbPool.getConnection();
-    const [games] = await connection.query(`select * from games ${search ? `where content like '%${search}%' or title like '%${search}%' or subtitle like '%${search}%'`: ''} order by ${orderBy} ${direction} limit ${limit} offset ${offset}`) as any;
+    const [games] = await connection.query(`select * from games ${
+        search ? `where content like '%${search}%' or title like '%${search}%' or subtitle like '%${search}%'`
+          : ""
+      } order by ${orderBy} ${direction} limit ${limit} offset ${offset}`) as any;
     const [[{count}]] = await connection.query(
         "select count(*) as count from games"
     ) as any;
@@ -85,7 +88,7 @@ export async function destroy(id: number) {
     const game = await findOneById(id);
     const connection = await dbPool.getConnection();
     const [response] = (await connection.query("delete from games where id=?", [id])) as any;
-    const success = response.affectRows >0
+    const success = response.affectRows > 0
     return {success, game}
 }
 

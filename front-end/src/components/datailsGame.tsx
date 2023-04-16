@@ -19,34 +19,34 @@ export function CurrentGame ({
     onDelete,
     loading
 }: DetailsGameProps) {
-    console.log(loading)
 
 
     return ( 
         <section className="px-7 bg-slate-100 rounded-3xl flex-[2] opacity-90">
-            <div className="py-10 justify-center"> 
-             {id !== undefined && (
-            <>
-            {loading ? <Loading /> :
-            <>
-                <div className="flex justify-end">
-                    <button
-                    className="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-1 px-2 rounded-md mr-4"
-                    onClick={onDelete}
-                    >
-                    <FaTrash />
-                    </button>
-                    <Link className="bg-blue-500 text-white font-bold p-2 rounded-md" to={`/editgame/${id}`}><FaPen /></Link>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <h2 className="font-bold justify-center" >{title}</h2>
-                    <img src={picture} alt={picture} className="w-80 my-6" />
-                    <h2>{subtitle}</h2>
-                    <h2>{content}</h2>
-                </div>
-            </>
-                }
-            </>
+            <div className="py-10 justify-center">
+                    {!id ? <p>Selecione um Título</p> : ''}
+                    {id !== undefined && (
+                <>
+                    {loading ? <Loading /> :
+                    <>
+                        <div className="flex justify-end">
+                            <button
+                            className="bg-red-500 hover:bg-red-600 text-white text-sm font-bold py-1 px-2 rounded-md mr-4"
+                            onClick={onDelete}
+                            >
+                            <FaTrash />
+                            </button>
+                            <Link className="bg-blue-500 text-white font-bold p-2 rounded-md" to={`/editgame/${id}`}><FaPen /></Link>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <h2 className="font-bold justify-center" >{title}</h2>
+                            <img src={picture} alt={picture} className="w-80 my-6" />
+                            <h2>{subtitle}</h2>
+                            <h2>{content}</h2>
+                        </div>
+                    </>
+                    }
+                </>
                 )}
             </div>
         </section>
