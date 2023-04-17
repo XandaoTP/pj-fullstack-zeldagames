@@ -91,7 +91,7 @@ export function GamesList ({ getgame  }: GameListProps, nextGames = false) {
         getGames({
             params: gamesParams
         });
-    }, []) 
+    }, [getGames]) 
     
     return (
         <div className="flex-[1]">

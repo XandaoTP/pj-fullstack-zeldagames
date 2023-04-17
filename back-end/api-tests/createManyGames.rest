@@ -1,17 +1,9 @@
-POST http://localhost:5000/games/createmany
+POST http://localhost:5000/games/
 Content-Type: application/json
 
-[
     {
-    "title": "oi 1",
+    "title": "zelda 1",
     "content": "oi 1",
     "subtitle": "oi 1",
-    "picture": "oi 1"
-    },   
-    {
-    "title": "oi 2",
-    "content": "oi 1",
-    "subtitle": "oi 1",
-    "picture": "oi 1"
+    "picture": "https://img.olhardigital.com.br/wp-content/uploads/2021/07/Tela-inicial-de-The-Legend-of-Zelda-NES.jpeg"
     }
-]

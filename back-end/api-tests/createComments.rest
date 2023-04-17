@@ -1,0 +1,8 @@
+POST http://localhost:5000/games/comments
+Content-Type: application/json
+
+    {
+    "gameId": 8,
+    "content": "O melhor zelda já lancado! 9"
+    } 
+    

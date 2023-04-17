@@ -36,7 +36,7 @@ const texts = {
     const navigate = useNavigate()
     const [, addGame] = useAxios(
         {
-            url:'/games',
+            url:'/games/',
             method: 'post',
         },
         {
@@ -61,20 +61,25 @@ const texts = {
           disabled={disable}
           className="border  border-black rounded-lg py-1 px-2 w-full"
           placeholder={texts.descriptionFieldPlaceholder}
-          
+          name={gameForm.fields.subtitle()}
         />
+        {gameForm.errors.title((event) => <ErrorMsg message={event.message} />)}
         <input
           type="text"
           disabled={disable}
           className="border border-black rounded-lg py-1 px-2 w-full"
           placeholder={texts.contentImage}
+          name={gameForm.fields.picture()}
         />
+        {gameForm.errors.picture((event) => <ErrorMsg message={event.message} />)}
         <textarea
           rows={5}
           disabled={disable}
           className="border border-black rounded-lg py-1 px-2 w-full resize-none"
           placeholder={texts.contentFieldPlaceholder}
+          name={gameForm.fields.content()}
         />
+        {gameForm.errors.content((event) => <ErrorMsg message={event.message} />)}
         <button
           className='text-black rounded-md bg-lime-900'
           disabled={disable}

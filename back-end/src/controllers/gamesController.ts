@@ -32,7 +32,8 @@ export const gamesController = express.Router();
     res.status(200).json({
       success,
       data: game,
-    });
+      });
+    
   });
   gamesController.post("/createmany", async (req, res) => {
     const { success } = await gamesRepository.createMany(req.body);
@@ -61,7 +62,7 @@ export const gamesController = express.Router();
 
   gamesController.put("/:id", async (req, res) => {
     const id = Number(req.params.id);
-    const {success, game } = await gamesRepository.update(id, req.body)
+    const {success, game } = await gamesRepository.update(id, req.body);
     res.status(200).json({
       success: true,
       data: {
@@ -69,4 +70,14 @@ export const gamesController = express.Router();
         data: game
       },
     });
+  });
+
+  gamesController.get("/comments/:id", async (req, res) => {
+    const result = await gamesRepository.findCommentsByZeldaId(Number(req.params.id));
+    res.status(200).json(result);
+  })
+
+  gamesController.post("/comments", async (req, res) => {
+      const response = await gamesRepository.createZeldaComment(req.body);
+      res.status(201).json(response)
   });

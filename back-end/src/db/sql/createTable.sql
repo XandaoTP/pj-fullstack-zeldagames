@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS games;
 
 CREATE TABLE games (
@@ -8,3 +9,11 @@ CREATE TABLE games (
     subtitle VARCHAR(255),
     created_at DATETIME DEFAULT NOW()
     );
+
+CREATE TABLE comments (
+id INT AUTO_INCREMENT PRIMARY KEY,
+zelda_id INT NOT NULL,
+content VARCHAR(255) NOT NULL,
+created_at DATETIME DEFAULT NOW(),
+FOREIGN KEY (zelda_id) REFERENCES games(id) ON DELETE CASCADE
+);
