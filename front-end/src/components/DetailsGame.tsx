@@ -1,11 +1,11 @@
-import { FaTrash, FaPen, FaComment, FaMarker, FaClosedCaptioning } from "react-icons/fa";
+import { FaTrash, FaPen, FaComment} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import type { Games } from "../entities/games"
-import { Loading } from './loading';
+import { Loading } from './Loading';
 import { useModal } from 'react-hooks-use-modal';
 import { AiFillCloseCircle } from "react-icons/ai";
 import {  useAxios, axios } from "../services/useAxios";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 
